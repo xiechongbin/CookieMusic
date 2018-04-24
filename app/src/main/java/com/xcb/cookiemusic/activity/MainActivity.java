@@ -1,9 +1,14 @@
-package com.xcb.cookiemusic;
+package com.xcb.cookiemusic.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.xcb.cookiemusic.R;
+
+/**
+ * app 主界面
+ * Created by xcb on 2018/4/24.
+ */
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

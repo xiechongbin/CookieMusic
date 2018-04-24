@@ -7,5 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    AppTheme.Text
+    <style name="AppTheme.Text" parent="TextAppearance.AppCompat" />
 
+    <attr name="playBarBackground" format="reference" />
 </resources>
