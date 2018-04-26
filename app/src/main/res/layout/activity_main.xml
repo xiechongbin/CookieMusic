@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <!--drawerLayout +navigationView 实现侧边栏 滑动功能   include 进来的为主内容-->
-    <include layout="@layout/layout_music_play_bottom_bar" />
+    <include layout="@layout/layout_activity_music_include" />
 
     <!-- 侧边栏  menu为列表的内容-->
     <android.support.design.widget.NavigationView

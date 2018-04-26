@@ -12,4 +12,17 @@
 
     <string name="local_music">本地音乐</string>
     <string name="online_music">在线音乐</string>
+    <string name="scanning">正在扫描…</string>
+    <string name="music_name">歌曲</string>
+    <string name="music_info">歌手 - 专辑</string>
+    <string name="share">分享</string>
+
+    <string name="delete_music">删除%s？</string>
+    <string name="sure">确定</string>
+    <string name="cancel">取消</string>
+    <string name="music_not_exist">%s不存在</string>
+    <string name="set_ringstone_success">设置成功</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

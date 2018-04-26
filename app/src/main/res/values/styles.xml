@@ -7,7 +7,15 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    AppTheme.Text
+
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/red</item>
+        <item name="colorPrimaryDark">@color/red</item>
+        <item name="colorAccent">@color/red</item>
+        <item name="playBarBackground">@drawable/selector_play_bar_bg</item>
+
+    </style>
+
     <style name="AppTheme.Text" parent="TextAppearance.AppCompat" />
 
     <attr name="playBarBackground" format="reference" />
