@@ -7,6 +7,7 @@ import android.provider.MediaStore;
 
 import com.xcb.cookiemusic.bean.Music;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +87,34 @@ public class MusicUtils {
         return musicList;
     }
 
+    /**
+     * 字节转化成mb 保留2位小数
+     *
+     * @param size 文件大小
+     * @return mb
+     */
     public static String convertMB(float size) {
-        return String.valueOf(size / 1024 / 1024) + "Mb";
+        DecimalFormat format = new DecimalFormat("0.0");
+        return format.format(size / 1024 / 1024) + "Mb";
+    }
+
+    /**
+     * @param miles 时长 毫秒
+     * @return 格式化后的时长
+     */
+    public static String convertTimeMilesToString(long miles) {
+        if (miles < 60000) {
+            return "00:" + miles / 1000;
+        } else {
+            long sec = miles / 1000;
+            long min = sec / 60;
+            long sec1 = sec % 60;
+            if (sec1 > 0 && sec1 < 10) {
+                return min + ":0" + sec;
+            } else {
+                return min + ":" + sec1;
+            }
+
+        }
     }
 }

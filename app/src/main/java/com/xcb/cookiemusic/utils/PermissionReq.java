@@ -3,9 +3,12 @@ package com.xcb.cookiemusic.utils;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -70,6 +73,7 @@ public class PermissionReq {
     private static AtomicInteger sRequestCode = new AtomicInteger(0);
     private static SparseArray<Result> sResultArray = new SparseArray<>();
     private static Set<String> sManifestPermissionSet;
+    public static final int RQUEST_CODE_WRITE_SETTINGS = 9999;
 
     public interface Result {
         void onGranted();
@@ -201,6 +205,13 @@ public class PermissionReq {
         return null;
     }
 
+    public static void getWriteSettingsPermission(Activity activity){
+        Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+        intent.setData(Uri.parse("package:"+activity.getPackageName()));
+        activity.startActivityForResult(intent,RQUEST_CODE_WRITE_SETTINGS);
+
+
+    }
     private static int genRequestCode() {
         return sRequestCode.incrementAndGet();
     }

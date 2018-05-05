@@ -12,8 +12,10 @@ import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.view.LayoutInflater;
@@ -27,6 +29,7 @@ import com.xcb.cookiemusic.R;
 import com.xcb.cookiemusic.adapter.LocalMusicAdapter;
 import com.xcb.cookiemusic.bean.Music;
 import com.xcb.cookiemusic.interfaces.OnMoreClickListener;
+import com.xcb.cookiemusic.log.Logger;
 import com.xcb.cookiemusic.utils.MusicUtils;
 import com.xcb.cookiemusic.utils.PermissionReq;
 import com.xcb.cookiemusic.utils.ToastUtils;
@@ -41,6 +44,7 @@ public class LocalMusicFragment extends BaseFragment implements AdapterView.OnIt
     private View view;
     private LocalMusicAdapter adapter;
     private Context context;
+    private Music choosedMusic;
 
     public LocalMusicFragment() {
     }
@@ -62,6 +66,14 @@ public class LocalMusicFragment extends BaseFragment implements AdapterView.OnIt
         adapter.setOnMoreClickListener(this);
         localMusicListView.setAdapter(adapter);
         scanMusic();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == PermissionReq.RQUEST_CODE_WRITE_SETTINGS){
+            Logger.d("更改系统设置权限申请成功");
+        }
     }
 
     /**
@@ -121,6 +133,7 @@ public class LocalMusicFragment extends BaseFragment implements AdapterView.OnIt
                                 share(music);
                                 break;
                             case 1:
+                                choosedMusic = music;
                                 setMusicAsRings(music);
                                 break;
                             case 2:
@@ -139,28 +152,35 @@ public class LocalMusicFragment extends BaseFragment implements AdapterView.OnIt
     /**
      * 设置音乐为手机铃声
      */
-    private void setMusicAsRings(Music music) {
-        Uri uri = MediaStore.Audio.Media.getContentUriForPath(music.getPath());
-        //查询音乐文件在媒体库中是否存在
-        Cursor cursor = context.getContentResolver().query(uri, null, MediaStore.MediaColumns.DATA + "=?", new String[]{music.getPath()}, null);
-        if (cursor == null) {
-            ToastUtils.toast(context, context.getString(R.string.music_not_exist, music.getTitle()));
-            return;
-        }
-        if (cursor.moveToFirst() && cursor.getCount() > 0) {
-            String id = cursor.getString(0);
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(MediaStore.Audio.Media.IS_MUSIC, true);
-            contentValues.put(MediaStore.Audio.Media.IS_RINGTONE, true);
-            contentValues.put(MediaStore.Audio.Media.IS_ALARM, true);
-            contentValues.put(MediaStore.Audio.Media.IS_NOTIFICATION, true);
-            contentValues.put(MediaStore.Audio.Media.IS_PODCAST, true);
-            context.getContentResolver().update(uri, contentValues, MediaStore.MediaColumns.DATA + "=?", new String[]{music.getPath()});
-            Uri newUri = ContentUris.withAppendedId(uri, Long.valueOf(id));
-            RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_RINGTONE, newUri);
-            ToastUtils.toast(context, context.getString(R.string.set_ringstone_success));
+    private void setMusicAsRings(final Music music) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(Settings.System.canWrite(getActivity())){
+                Uri uri = MediaStore.Audio.Media.getContentUriForPath(music.getPath());
+                //查询音乐文件在媒体库中是否存在
+                Cursor cursor = context.getContentResolver().query(uri, null, MediaStore.MediaColumns.DATA + "=?", new String[]{music.getPath()}, null);
+                if (cursor == null) {
+                    ToastUtils.toast(context, context.getString(R.string.music_not_exist, music.getTitle()));
+                    return;
+                }
+                if (cursor.moveToFirst() && cursor.getCount() > 0) {
+                    String id = cursor.getString(0);
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put(MediaStore.Audio.Media.IS_MUSIC, true);
+                    contentValues.put(MediaStore.Audio.Media.IS_RINGTONE, true);
+                    contentValues.put(MediaStore.Audio.Media.IS_ALARM, true);
+                    contentValues.put(MediaStore.Audio.Media.IS_NOTIFICATION, true);
+                    contentValues.put(MediaStore.Audio.Media.IS_PODCAST, true);
+                    context.getContentResolver().update(uri, contentValues, MediaStore.MediaColumns.DATA + "=?", new String[]{music.getPath()});
+                    Uri newUri = ContentUris.withAppendedId(uri, Long.valueOf(id));
+                    RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_RINGTONE, newUri);
+                    ToastUtils.toast(context, context.getString(R.string.set_ringstone_success));
+                }
+            }else{
+                PermissionReq.getWriteSettingsPermission(getActivity());
+            }
         }
     }
+
 
     /**
      * 删除音乐
@@ -182,6 +202,8 @@ public class LocalMusicFragment extends BaseFragment implements AdapterView.OnIt
                                 Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://".concat(music.getPath())));
                                 getContext().sendBroadcast(intent);
                             }
+                        }else{
+                            ToastUtils.toast(getActivity(),R.string.music_delete_failed);
                         }
                     }
                 }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -202,6 +224,7 @@ public class LocalMusicFragment extends BaseFragment implements AdapterView.OnIt
                 .setMusicName(music.getTitle())
                 .setMusicPath(music.getPath())
                 .setFileName(music.getFileName())
+                .setMusicDuration(MusicUtils.convertTimeMilesToString(music.getDuration()))
                 .setFileSize(MusicUtils.convertMB(music.getFileSize()))
                 .setMusicQuality("普通").create();
         bottomSheetDialog.setContentView(musicDetailsView);

@@ -37,6 +37,7 @@ public class MusicDetailsView extends View {
         private TextView tv_musicSize;
         private TextView tv_musicQuality;
         private TextView tv_musicPath;
+        private TextView tv_duration;
 
         public Builder(Context context) {
             initView(context);
@@ -49,6 +50,7 @@ public class MusicDetailsView extends View {
             tv_musicSize = (TextView) detailsView.findViewById(R.id.tv_music_details_music_size);
             tv_musicQuality = (TextView) detailsView.findViewById(R.id.tv_music_details_music_quality);
             tv_musicPath = (TextView) detailsView.findViewById(R.id.tv_music_details_music_path);
+            tv_duration = (TextView) detailsView.findViewById(R.id.tv_music_details_duration);
         }
 
         public Builder setMusicName(String musicName) {
@@ -73,6 +75,10 @@ public class MusicDetailsView extends View {
 
         public Builder setMusicPath(String filePath) {
             tv_musicPath.setText(filePath);
+            return this;
+        }
+        public Builder setMusicDuration(String duration) {
+            tv_duration.setText(duration);
             return this;
         }
 
