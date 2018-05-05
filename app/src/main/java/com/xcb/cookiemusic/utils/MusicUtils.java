@@ -86,7 +86,7 @@ public class MusicUtils {
         return musicList;
     }
 
-    public static void deleteMusic(Music music) {
-
+    public static String convertMB(float size) {
+        return String.valueOf(size / 1024 / 1024) + "Mb";
     }
 }

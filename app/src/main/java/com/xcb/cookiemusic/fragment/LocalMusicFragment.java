@@ -8,19 +8,20 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.xcb.cookiemusic.R;
 import com.xcb.cookiemusic.adapter.LocalMusicAdapter;
@@ -29,6 +30,7 @@ import com.xcb.cookiemusic.interfaces.OnMoreClickListener;
 import com.xcb.cookiemusic.utils.MusicUtils;
 import com.xcb.cookiemusic.utils.PermissionReq;
 import com.xcb.cookiemusic.utils.ToastUtils;
+import com.xcb.cookiemusic.view.MusicDetailsView;
 
 import java.io.File;
 import java.util.List;
@@ -195,7 +197,16 @@ public class LocalMusicFragment extends BaseFragment implements AdapterView.OnIt
      * 展示音乐详情
      */
     private void showMusicDetails(Music music) {
-
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context, R.style.BottomSheetDialogStyle);
+        View musicDetailsView = new MusicDetailsView.Builder(context)
+                .setMusicName(music.getTitle())
+                .setMusicPath(music.getPath())
+                .setFileName(music.getFileName())
+                .setFileSize(MusicUtils.convertMB(music.getFileSize()))
+                .setMusicQuality("普通").create();
+        bottomSheetDialog.setContentView(musicDetailsView);
+        bottomSheetDialog.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundColor(Color.TRANSPARENT);//去除背景 设置圆角效果
+        bottomSheetDialog.show();
     }
 
     /**

@@ -19,4 +19,8 @@
     <color name="grey_300_96p">#F5E0E0E0</color>
     <color name="grey_900">#212121</color>
     <color name="grey_900_96p">#F5212121</color>
+
+    <color name="color_music_details_title">#757575</color>
+    <color name="color_music_details_bg">#f5f5f5</color>
+    <color name="color_music_details_content">#BDBDBD</color>
 </resources>

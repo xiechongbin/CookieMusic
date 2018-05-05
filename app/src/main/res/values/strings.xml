@@ -23,6 +23,13 @@
     <string name="music_not_exist">%s不存在</string>
     <string name="set_ringstone_success">设置成功</string>
 
+    <string name="music_details_music">歌曲：</string>
+    <string name="music_details_file_name">文件名称：</string>
+    <string name="music_details_music_duration">播放时长：</string>
+    <string name="music_details_music_quality">文件音质：</string>
+    <string name="music_details_music_size">文件大小：</string>
+    <string name="music_details_music_path">文件路径：</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
