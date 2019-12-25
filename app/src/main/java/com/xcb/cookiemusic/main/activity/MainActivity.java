@@ -1,4 +1,4 @@
-package com.xcb.cookiemusic.main;
+package com.xcb.cookiemusic.main.activity;
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
