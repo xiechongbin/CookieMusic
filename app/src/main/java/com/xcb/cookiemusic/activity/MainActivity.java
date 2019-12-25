@@ -1,6 +1,5 @@
 package com.xcb.cookiemusic.activity;
 
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.navigation.NavigationView;
+import com.xcb.commonlibrary.BaseActivity;
 import com.xcb.cookiemusic.R;
 import com.xcb.cookiemusic.adapter.FragmentAdapter;
 import com.xcb.cookiemusic.fragment.LocalMusicFragment;
@@ -36,32 +36,30 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     private OnlineMusicFragment onlineMusicFragment;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        findViews();
-        setUpView();
+    protected int getLayoutID() {
+        return R.layout.activity_main;
     }
 
-    private void findViews() {
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        iv_menu = (ImageView) findViewById(R.id.iv_menu);
-        iv_search = (ImageView) findViewById(R.id.iv_search);
-        tv_local_music = (TextView) findViewById(R.id.tv_local_music);
-        tv_online_music = (TextView) findViewById(R.id.tv_online_music);
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        flPlayBar = (FrameLayout) findViewById(R.id.fl_play_bar);
+    @Override
+    protected void initViews() {
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.navigation_view);
+        iv_menu = findViewById(R.id.iv_menu);
+        iv_search = findViewById(R.id.iv_search);
+        tv_local_music = findViewById(R.id.tv_local_music);
+        tv_online_music = findViewById(R.id.tv_online_music);
+        mViewPager = findViewById(R.id.viewpager);
+        flPlayBar = findViewById(R.id.fl_play_bar);
 
         iv_menu.setOnClickListener(this);
         iv_search.setOnClickListener(this);
         tv_local_music.setOnClickListener(this);
         tv_online_music.setOnClickListener(this);
         flPlayBar.setOnClickListener(this);
-
     }
 
-    private void setUpView() {
+    @Override
+    protected void initData() {
         navigationHeader = LayoutInflater.from(this).inflate(R.layout.layout_navigation_header, navigationView, false);
         navigationView.addHeaderView(navigationHeader);//添加头部
         localMusicFragment = new LocalMusicFragment();
@@ -73,6 +71,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         mViewPager.addOnPageChangeListener(this);
         tv_local_music.setSelected(true);
     }
+
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

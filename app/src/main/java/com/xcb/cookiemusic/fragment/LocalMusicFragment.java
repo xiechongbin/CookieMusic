@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ContentUris;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -23,9 +22,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.xcb.commonlibrary.BaseFragment;
 import com.xcb.cookiemusic.R;
 import com.xcb.cookiemusic.adapter.LocalMusicAdapter;
 import com.xcb.cookiemusic.bean.Music;
@@ -42,25 +43,23 @@ import java.util.List;
 public class LocalMusicFragment extends BaseFragment implements AdapterView.OnItemClickListener, OnMoreClickListener {
     private ListView localMusicListView;
     private TextView tv_searching_tips;
-    private View view;
     private LocalMusicAdapter adapter;
     private Music choosedMusic;
 
-    public LocalMusicFragment() {
+    @Override
+    protected int getLayoutID() {
+        return R.layout.fragment_local_music;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_local_music, container, false);
-        return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        localMusicListView = (ListView) view.findViewById(R.id.lv_local_music);
-        tv_searching_tips = (TextView) view.findViewById(R.id.tv_searching);
+    protected void initViews(@NonNull View view, @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        localMusicListView = view.findViewById(R.id.lv_local_music);
+        tv_searching_tips = view.findViewById(R.id.tv_searching);
         localMusicListView.setOnItemClickListener(this);
+    }
+
+    @Override
+    protected void initData() {
         adapter = new LocalMusicAdapter();
         adapter.setOnMoreClickListener(this);
         localMusicListView.setAdapter(adapter);
