@@ -16,8 +16,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +23,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.xcb.cookiemusic.R;
 import com.xcb.cookiemusic.adapter.LocalMusicAdapter;
 import com.xcb.cookiemusic.bean.Music;
@@ -43,7 +44,6 @@ public class LocalMusicFragment extends BaseFragment implements AdapterView.OnIt
     private TextView tv_searching_tips;
     private View view;
     private LocalMusicAdapter adapter;
-    private Context context;
     private Music choosedMusic;
 
     public LocalMusicFragment() {
@@ -58,7 +58,6 @@ public class LocalMusicFragment extends BaseFragment implements AdapterView.OnIt
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        context = getContext();
         localMusicListView = (ListView) view.findViewById(R.id.lv_local_music);
         tv_searching_tips = (TextView) view.findViewById(R.id.tv_searching);
         localMusicListView.setOnItemClickListener(this);
@@ -71,7 +70,7 @@ public class LocalMusicFragment extends BaseFragment implements AdapterView.OnIt
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PermissionReq.RQUEST_CODE_WRITE_SETTINGS){
+        if (requestCode == PermissionReq.RQUEST_CODE_WRITE_SETTINGS) {
             Logger.d("更改系统设置权限申请成功");
         }
     }
@@ -80,7 +79,7 @@ public class LocalMusicFragment extends BaseFragment implements AdapterView.OnIt
      * 扫描本地音乐
      */
     private void scanMusic() {
-        PermissionReq.with(this)
+        PermissionReq.with(getActivity())
                 .permissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .result(new PermissionReq.Result() {
                     @Override
@@ -89,7 +88,7 @@ public class LocalMusicFragment extends BaseFragment implements AdapterView.OnIt
 
                             @Override
                             protected List<Music> doInBackground(Void... params) {
-                                return MusicUtils.getLocalMusics(context);
+                                return MusicUtils.getLocalMusics(getActivity());
                             }
 
                             @Override
@@ -123,7 +122,7 @@ public class LocalMusicFragment extends BaseFragment implements AdapterView.OnIt
      * 展示更多页面对话框
      */
     private void showMoreDialog(final Music music) {
-        AlertDialog dialog = new AlertDialog.Builder(context)
+        AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setTitle(music.getTitle())
                 .setItems(R.array.local_music_dialog, new DialogInterface.OnClickListener() {
                     @Override
@@ -154,12 +153,12 @@ public class LocalMusicFragment extends BaseFragment implements AdapterView.OnIt
      */
     private void setMusicAsRings(final Music music) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(Settings.System.canWrite(getActivity())){
+            if (Settings.System.canWrite(getActivity())) {
                 Uri uri = MediaStore.Audio.Media.getContentUriForPath(music.getPath());
                 //查询音乐文件在媒体库中是否存在
-                Cursor cursor = context.getContentResolver().query(uri, null, MediaStore.MediaColumns.DATA + "=?", new String[]{music.getPath()}, null);
+                Cursor cursor = getActivity().getContentResolver().query(uri, null, MediaStore.MediaColumns.DATA + "=?", new String[]{music.getPath()}, null);
                 if (cursor == null) {
-                    ToastUtils.toast(context, context.getString(R.string.music_not_exist, music.getTitle()));
+                    ToastUtils.toast(getActivity(), getActivity().getString(R.string.music_not_exist, music.getTitle()));
                     return;
                 }
                 if (cursor.moveToFirst() && cursor.getCount() > 0) {
@@ -170,12 +169,12 @@ public class LocalMusicFragment extends BaseFragment implements AdapterView.OnIt
                     contentValues.put(MediaStore.Audio.Media.IS_ALARM, true);
                     contentValues.put(MediaStore.Audio.Media.IS_NOTIFICATION, true);
                     contentValues.put(MediaStore.Audio.Media.IS_PODCAST, true);
-                    context.getContentResolver().update(uri, contentValues, MediaStore.MediaColumns.DATA + "=?", new String[]{music.getPath()});
+                    getActivity().getContentResolver().update(uri, contentValues, MediaStore.MediaColumns.DATA + "=?", new String[]{music.getPath()});
                     Uri newUri = ContentUris.withAppendedId(uri, Long.valueOf(id));
-                    RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_RINGTONE, newUri);
-                    ToastUtils.toast(context, context.getString(R.string.set_ringstone_success));
+                    RingtoneManager.setActualDefaultRingtoneUri(getActivity(), RingtoneManager.TYPE_RINGTONE, newUri);
+                    ToastUtils.toast(getActivity(), getActivity().getString(R.string.set_ringstone_success));
                 }
-            }else{
+            } else {
                 PermissionReq.getWriteSettingsPermission(getActivity());
             }
         }
@@ -202,8 +201,8 @@ public class LocalMusicFragment extends BaseFragment implements AdapterView.OnIt
                                 Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://".concat(music.getPath())));
                                 getContext().sendBroadcast(intent);
                             }
-                        }else{
-                            ToastUtils.toast(getActivity(),R.string.music_delete_failed);
+                        } else {
+                            ToastUtils.toast(getActivity(), R.string.music_delete_failed);
                         }
                     }
                 }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -219,8 +218,8 @@ public class LocalMusicFragment extends BaseFragment implements AdapterView.OnIt
      * 展示音乐详情
      */
     private void showMusicDetails(Music music) {
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context, R.style.BottomSheetDialogStyle);
-        View musicDetailsView = new MusicDetailsView.Builder(context)
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity(), R.style.BottomSheetDialogStyle);
+        View musicDetailsView = new MusicDetailsView.Builder(getActivity())
                 .setMusicName(music.getTitle())
                 .setMusicPath(music.getPath())
                 .setFileName(music.getFileName())

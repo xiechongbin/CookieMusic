@@ -1,10 +1,6 @@
 package com.xcb.cookiemusic.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +8,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.navigation.NavigationView;
 import com.xcb.cookiemusic.R;
 import com.xcb.cookiemusic.adapter.FragmentAdapter;
 import com.xcb.cookiemusic.fragment.LocalMusicFragment;
@@ -99,7 +99,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_menu:
-                drawerLayout.openDrawer(Gravity.START);
+                drawerLayout.openDrawer(Gravity.LEFT);
                 break;
             case R.id.iv_search:
                 break;
