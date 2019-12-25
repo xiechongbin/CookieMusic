@@ -1,4 +1,4 @@
-package com.xcb.cookiemusic.fragment;
+package com.xcb.cookiemusic.main.fragment;
 
 
 import android.os.Bundle;

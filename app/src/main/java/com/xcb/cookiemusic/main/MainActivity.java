@@ -1,4 +1,4 @@
-package com.xcb.cookiemusic.activity;
+package com.xcb.cookiemusic.main;
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,8 +14,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.xcb.commonlibrary.BaseActivity;
 import com.xcb.cookiemusic.R;
 import com.xcb.cookiemusic.adapter.FragmentAdapter;
-import com.xcb.cookiemusic.fragment.LocalMusicFragment;
-import com.xcb.cookiemusic.fragment.OnlineMusicFragment;
+import com.xcb.cookiemusic.main.fragment.LocalMusicFragment;
+import com.xcb.cookiemusic.main.fragment.OnlineMusicFragment;
 
 /**
  * app 主界面
