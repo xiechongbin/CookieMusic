@@ -13,7 +13,7 @@ import com.xcb.commonlibrary.base.BaseFragment;
 import com.xcb.cookiemusic.R;
 
 
-public class OnlineMusicFragment extends BaseFragment {
+public class MusicVideoFragment extends BaseFragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -22,12 +22,12 @@ public class OnlineMusicFragment extends BaseFragment {
     private String mParam2;
 
 
-    public OnlineMusicFragment() {
+    public MusicVideoFragment() {
 
     }
 
-    public static OnlineMusicFragment newInstance(String param1, String param2) {
-        OnlineMusicFragment fragment = new OnlineMusicFragment();
+    public static MusicVideoFragment newInstance(String param1, String param2) {
+        MusicVideoFragment fragment = new MusicVideoFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -37,7 +37,7 @@ public class OnlineMusicFragment extends BaseFragment {
 
     @Override
     protected int getLayoutID() {
-        return R.layout.fragment_local_music;
+        return R.layout.fragment_video;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.xcb.commonlibrary;
+package com.xcb.commonlibrary.base;
 
 import java.lang.ref.WeakReference;
 

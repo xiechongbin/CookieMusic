@@ -26,7 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.xcb.commonlibrary.BaseFragment;
+import com.xcb.commonlibrary.base.BaseFragment;
 import com.xcb.cookiemusic.R;
 import com.xcb.cookiemusic.adapter.LocalMusicAdapter;
 import com.xcb.cookiemusic.bean.Music;
