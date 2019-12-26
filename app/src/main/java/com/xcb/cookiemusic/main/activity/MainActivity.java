@@ -43,7 +43,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     private ImageView iv_search;
     private ViewPager mViewPager;
     private View navigationHeader;
-    private FrameLayout fl_bottom_bar;
 
 
     private CloudFragment cloudFragment;
@@ -52,7 +51,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     private MyMusicFragment myMusicFragment;
     private TabLayout tabLayout;
     private List<Fragment> fragmentList = new ArrayList<>();
-    private String[] titles = {"我的", "发现", "云村", "视频"};
+    private String[] titles;
 
     @Override
     protected int getLayoutID() {
@@ -66,12 +65,10 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         iv_menu = findViewById(R.id.iv_menu);
         iv_search = findViewById(R.id.iv_search);
         mViewPager = findViewById(R.id.viewpager);
-        fl_bottom_bar = findViewById(R.id.fl_bottom_bar);
         tabLayout = findViewById(R.id.tabLayout);
 
         iv_menu.setOnClickListener(this);
         iv_search.setOnClickListener(this);
-        fl_bottom_bar.setOnClickListener(this);
         tabLayout.setOnClickListener(this);
     }
 
@@ -86,6 +83,11 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         findFragment = FindFragment.newInstance("", "");
         musicVideoFragment = MusicVideoFragment.newInstance("", "");
         myMusicFragment = MyMusicFragment.newInstance("", "");
+        titles = new String[4];
+        titles[0] = getResources().getString(R.string.my);
+        titles[1] = getResources().getString(R.string.find);
+        titles[2] = getResources().getString(R.string.cloud);
+        titles[3] = getResources().getString(R.string.video);
         initTabLayout();
     }
 
@@ -153,10 +155,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
                 drawerLayout.openDrawer(Gravity.LEFT);
                 break;
             case R.id.iv_search:
-                break;
-            case R.id.fl_bottom_bar:
-                break;
-            case R.id.tabLayout:
                 break;
         }
     }

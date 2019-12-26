@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PauseCircleProgressView">
+        <attr name="progressColor" format="color" />
+        <attr name="defaultColor" format="color" />
+        <attr name="radius" format="dimension" />
+        <attr name="ringWidth" format="dimension" />
+    </declare-styleable>
+</resources>
