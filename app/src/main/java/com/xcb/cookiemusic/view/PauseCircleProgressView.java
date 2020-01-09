@@ -7,17 +7,13 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Rect;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
-
 
 import androidx.annotation.Nullable;
 
 import com.xcb.cookiemusic.R;
-import com.xcb.cookiemusic.utils.CountDownUtils;
 import com.xcb.cookiemusic.utils.ImageUtils;
 
 import java.math.BigDecimal;
@@ -49,8 +45,8 @@ public class PauseCircleProgressView extends View {
     private Rect rect;
     private Rect rect1;
     private boolean isStart = false;
-    private int currentProgress;
-    private int maxProgress;
+    private int currentProgress = 0;
+    private int maxProgress = 100;
     //画圆弧RectF
     private RectF rectF;
     //抗锯齿

@@ -28,6 +28,7 @@ import com.xcb.cookiemusic.main.fragment.CloudFragment;
 import com.xcb.cookiemusic.main.fragment.FindFragment;
 import com.xcb.cookiemusic.main.fragment.MusicVideoFragment;
 import com.xcb.cookiemusic.main.fragment.MyMusicFragment;
+import com.xcb.cookiemusic.view.MusicPlayBottomBarControlView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     private ImageView iv_search;
     private ViewPager mViewPager;
     private View navigationHeader;
+    private MusicPlayBottomBarControlView musicPlayBottomBarControlView;
 
 
     private CloudFragment cloudFragment;
@@ -66,6 +68,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         iv_search = findViewById(R.id.iv_search);
         mViewPager = findViewById(R.id.viewpager);
         tabLayout = findViewById(R.id.tabLayout);
+        musicPlayBottomBarControlView = findViewById(R.id.bottomMusicController);
 
         iv_menu.setOnClickListener(this);
         iv_search.setOnClickListener(this);
@@ -166,7 +169,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.d("Mains", "onTouchEvent");
         return super.onTouchEvent(event);
     }
 
