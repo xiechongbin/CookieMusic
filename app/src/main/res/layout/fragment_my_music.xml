@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
     <TextView
+        android:id="@+id/tv_start"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/space_80"
+        android:layout_marginTop="@dimen/space_80"
         android:gravity="center"
-        android:text="我的"
-        android:visibility="gone" />
+        android:text="开始" />
+
+    <TextView
+        android:id="@+id/tv_pause"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_80"
+        android:layout_marginTop="@dimen/space_80"
+        android:gravity="center"
+        android:text="暂停" />
 
     <com.xcb.cookiemusic.view.PauseCircleProgressView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center" />
-</FrameLayout>
+        android:id="@+id/progressView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        app:ringWidth="2.5dp"
+        app:defaultColor="@color/color_4b4b4b"
+        android:layout_marginTop="50dp" />
+</LinearLayout>

@@ -5,14 +5,22 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
+
 
 import androidx.annotation.Nullable;
 
 import com.xcb.cookiemusic.R;
+import com.xcb.cookiemusic.utils.CountDownUtils;
+import com.xcb.cookiemusic.utils.ImageUtils;
+
+import java.math.BigDecimal;
 
 /**
  * @author xcb
@@ -20,7 +28,14 @@ import com.xcb.cookiemusic.R;
  * description:带进度条的暂停按钮
  */
 public class PauseCircleProgressView extends View {
+    /**
+     * 默认控件大小
+     */
     private static final int DEFAULT_SIZE = 120;
+    /**
+     * 画圆弧启示位置
+     */
+    private static final int DRAW_ARC_START_ANGEL = 270;
     //默认的颜色
     private int defaultColor;
     private int progressColor;
@@ -28,6 +43,18 @@ public class PauseCircleProgressView extends View {
     private int width, height, min;
     private int ringWidth;
     private Paint mPaint;
+    private Paint arcPaint;//圆弧
+    private Bitmap mBitmapStop;
+    private Bitmap mBitmapStart;
+    private Rect rect;
+    private Rect rect1;
+    private boolean isStart = false;
+    private int currentProgress;
+    private int maxProgress;
+    //画圆弧RectF
+    private RectF rectF;
+    //抗锯齿
+    private PaintFlagsDrawFilter pfd;
 
     public PauseCircleProgressView(Context context) {
         super(context);
@@ -55,11 +82,23 @@ public class PauseCircleProgressView extends View {
     }
 
     private void init() {
+        pfd = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
+        mBitmapStop = ImageUtils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_pause));
+        mBitmapStart = ImageUtils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_start));
+        rect = new Rect(0, 0, mBitmapStop.getWidth(), mBitmapStop.getHeight());
         mPaint = new Paint();
         mPaint.setColor(defaultColor);
-        mPaint.setAntiAlias(true);
+        mPaint.setAntiAlias(true);//抗锯齿
         mPaint.setStyle(Paint.Style.STROKE);//画笔属性是空心圆
         mPaint.setStrokeWidth(ringWidth);//设置画笔粗细
+
+        arcPaint = new Paint();
+        arcPaint.setColor(progressColor);
+        arcPaint.setAntiAlias(true);//抗锯齿
+        arcPaint.setStyle(Paint.Style.STROKE);//画笔属性是空心圆
+        arcPaint.setStrokeWidth(ringWidth);//设置画笔粗细
+
+        rectF = new RectF();
     }
 
     @Override
@@ -70,6 +109,11 @@ public class PauseCircleProgressView extends View {
         min = Math.min(width, height);
         //保证控件为正方形
         setMeasuredDimension(min, min);
+
+        rectF.left = ringWidth;
+        rectF.top = ringWidth;
+        rectF.bottom = min - ringWidth;
+        rectF.right = min - ringWidth;
     }
 
     /**
@@ -93,10 +137,14 @@ public class PauseCircleProgressView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+        canvas.setDrawFilter(pfd);
         drawCircle(canvas);
-        // drawTriangle(canvas);
-        drawLine(canvas);
+        if (isStart) {
+            drawTriangle(canvas);
+        } else {
+            drawPauseLine(canvas);
+        }
+        drawArc(canvas);
     }
 
     /**
@@ -110,17 +158,55 @@ public class PauseCircleProgressView extends View {
      * 画三角形
      */
     private void drawTriangle(Canvas canvas) {
-        Bitmap bitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.ic_san)).getBitmap();
-        Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
         Rect rect1 = new Rect(min / 4, min / 4, min / 4 * 3, min / 4 * 3);
-        canvas.drawBitmap(bitmap, rect, rect1, mPaint);
+        canvas.drawBitmap(mBitmapStop, rect, rect1, mPaint);
     }
 
     /**
      * 画暂停竖线
      */
-    private void drawLine(Canvas canvas) {
-        canvas.drawLine(min / 8 * 3, min / 4, min / 8 * 3, min / 4 * 3, mPaint);
-        canvas.drawLine(min / 8 * 5, min / 4, min / 8 * 5, min / 4 * 3, mPaint);
+    private void drawPauseLine(Canvas canvas) {
+        Rect rect1 = new Rect(min / 4, min / 5, min / 4 * 3, min / 5 * 4);
+        canvas.drawBitmap(mBitmapStart, rect, rect1, mPaint);
+    }
+
+    /**
+     * 画圆弧
+     */
+    private void drawArc(Canvas canvas) {
+        //比例
+        float scale = (float) new BigDecimal((float) currentProgress / maxProgress).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        canvas.drawArc(rectF, DRAW_ARC_START_ANGEL, scale * 360, false, arcPaint);
+    }
+
+    /**
+     * 开始
+     */
+    public void pause() {
+        isStart = false;
+        invalidate();
+    }
+
+    /**
+     * 暂停
+     */
+    public void start() {
+        isStart = true;
+        invalidate();
+    }
+
+    /**
+     * 设置进度(0-100)
+     */
+    public void setProgress(int progress) {
+        this.currentProgress = progress;
+        invalidate();
+    }
+
+    /**
+     * 设置最大进度
+     */
+    public void setMaxProgress(int maxProgress) {
+        this.maxProgress = maxProgress;
     }
 }
