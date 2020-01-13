@@ -3,19 +3,80 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
+
     defaultConfig {
         applicationId rootProject.ext.applicationId
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        resConfigs 'en', 'zh'
+        vectorDrawables.useSupportLibrary = true
+
+        signingConfigs {
+            debug {
+                keyAlias rootProject.ext.key_alias
+                keyPassword rootProject.ext.key_password
+                storeFile file(rootProject.ext.one_key_file)
+                storePassword rootProject.ext.store_password
+            }
+            release {
+                keyAlias rootProject.ext.key_alias
+                keyPassword rootProject.ext.key_password
+                storeFile file(rootProject.ext.one_key_file)
+                storePassword rootProject.ext.store_password
+            }
+        }
+
+        /**
+         * 自定义名称生成apk文件执行方法
+         */
+        applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                def outputFile = output.outputFile
+                def name = outputFile.name.substring(4, outputFile.name.length() - ".apk".length())
+                def fileName = name + "-" + releaseTime() + "-${rootProject.ext.versionName}" + ".apk"
+                outputFileName = fileName
+            }
         }
     }
+    buildTypes {
+        debug {
+            multiDexEnabled true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig null
+        }
+        release {
+            multiDexEnabled true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig null
+        }
+    }
+    flavorDimensions "hostA", "hostB"
+    productFlavors {
+        FlavorA {
+            dimension = 'hostA'
+            applicationId rootProject.ext.applicationId
+            signingConfig signingConfigs.debug
+        }
+
+        FlavorB {
+            dimension = 'hostB'
+            applicationId rootProject.ext.applicationId
+            signingConfig signingConfigs.debug
+        }
+    }
+
+
+}
+/**
+ * 获取日期
+ */
+static def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
 
 dependencies {

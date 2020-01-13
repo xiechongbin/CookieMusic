@@ -20,7 +20,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
-import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.xcb.commonlibrary.base.BaseActivity;
 import com.xcb.commonlibrary.view.CustomDrawerLayout;
 import com.xcb.cookiemusic.R;
@@ -77,8 +76,8 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
     @Override
     protected void initData() {
-        QMUIStatusBarHelper.translucent(this);
-        QMUIStatusBarHelper.setStatusBarLightMode(this);
+      //  QMUIStatusBarHelper.translucent(this);
+     //   QMUIStatusBarHelper.setStatusBarLightMode(this);
         navigationHeader = LayoutInflater.from(this).inflate(R.layout.layout_navigation_header, navigationView, false);
         navigationView.addHeaderView(navigationHeader);//添加头部
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);//禁止滑动
