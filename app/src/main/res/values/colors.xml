@@ -672,12 +672,12 @@
     <color name="t_miniPlayBarSubtitle">#ffffffff</color>
     <color name="t_miniPlayBarTitle">#ffffffff</color>
     <color name="t_playlistBg">#19000000</color>
-    <color name="r_">#ffffffff</color>
+    <color name="color_ffffff">#ffffffff</color>
     <color name="ra">#ff666666</color>
     <color name="rb">#cdffffff</color>
-    <color name="themeColor">@color/re</color>
+    <color name="themeColor">@color/color_ffff3a3a</color>
     <color name="rd">#ffff6340</color>
-    <color name="re">#ffff3a3a</color>
+    <color name="color_ffff3a3a">#ffff3a3a</color>
     <color name="rf">#ffce3d3e</color>
     <color name="rg">#ffa53e37</color>
     <color name="rh">#1a000000</color>

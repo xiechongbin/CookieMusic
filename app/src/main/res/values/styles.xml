@@ -30,7 +30,6 @@
         <item name="qmui_config_color_blue">@color/white</item>
         <item name="qmui_content_spacing_horizontal">20dp</item>
         <item name="qmui_content_padding_horizontal">@dimen/qmui_content_spacing_horizontal</item>
-        <item name="android:windowBackground">@drawable/img_splash_bg</item>
 
         <item name="QMUITopBarStyle">@style/QDTopBar</item>
     </style>
@@ -39,6 +38,7 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@drawable/img_splash_bg</item>
     </style>
 
     <style name="LaunchStyle" parent="AppTheme">
