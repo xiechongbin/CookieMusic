@@ -34,8 +34,7 @@
 
         <activity android:name=".main.activity.MainActivity"></activity>
         <activity
-            android:name=".login.LoginAndRegisterActivity"
-            android:theme="@style/AppTheme.fullScreenTheme" />
+            android:name=".login.LoginAndRegisterActivity" />
     </application>
 
 </manifest>

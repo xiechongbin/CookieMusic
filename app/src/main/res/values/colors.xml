@@ -737,7 +737,7 @@
     <color name="su">#b3ffffff</color>
     <color name="sv">#8cffffff</color>
     <color name="sw">#33000000</color>
-    <color name="sx">#ff1e2123</color>
+    <color name="color_ff1e2123">#ff1e2123</color>
     <color name="sy">#e5000000</color>
     <color name="sz">#cc000000</color>
     <color name="t0">#ff000000</color>
@@ -780,4 +780,9 @@
     <color name="u1">#66ffffff</color>
     <color name="color_ff3f49">#ff3f49</color>
     <color name="color_dc2e1e">#dc2e1e</color>
+    <color name="app_color_blue">#00A8E1</color>
+    <color name="color_373737">#373737</color>
+    <color name="color_989898">#989898</color>
+    <color name="color_fb3b39">#fb3b39</color>
+    <color name="color_dadada">#dadada</color>
 </resources>
