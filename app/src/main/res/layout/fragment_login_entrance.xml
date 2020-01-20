@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_dc2e1e"
+    android:orientation="vertical">
+
+
+    <com.xcb.commonlibrary.view.WaveView
+        android:id="@+id/waveView"
+        android:layout_width="@dimen/space_300"
+        android:layout_height="@dimen/space_300"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/tv_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/waveView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/waveView"
+        app:srcCompat="@drawable/ic_icon" />
+
+    <View
+        android:id="@+id/view_bg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/color_dc2e1e"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tv_login_with_phone"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/space_45"
+        android:layout_marginStart="@dimen/space_40"
+        android:layout_marginEnd="@dimen/space_40"
+        android:layout_marginBottom="@dimen/space_60"
+        android:background="@drawable/shape_btn_login_with_phone"
+        android:gravity="center"
+        android:text="@string/login_phone"
+        android:textColor="@color/color_ff3f49"
+        android:textSize="@dimen/text_size_16"
+        app:layout_constraintBottom_toBottomOf="@id/view_bg"
+        app:layout_constraintEnd_toEndOf="@id/view_bg"
+        app:layout_constraintStart_toStartOf="@id/view_bg"
+        app:layout_constraintTop_toTopOf="@id/view_bg" />
+
+
+    <TextView
+        android:id="@+id/tv_enter_now"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/space_45"
+        android:layout_marginStart="@dimen/space_40"
+        android:layout_marginTop="@dimen/space_20"
+        android:layout_marginEnd="@dimen/space_40"
+        android:background="@drawable/shape_btn_enter_now"
+        android:gravity="center"
+        android:text="@string/enter_now"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_16"
+        app:layout_constraintEnd_toEndOf="@id/view_bg"
+        app:layout_constraintStart_toStartOf="@id/view_bg"
+        app:layout_constraintTop_toBottomOf="@id/tv_login_with_phone" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/login_wei_xin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_80"
+        android:layout_marginTop="@dimen/space_20"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintLeft_toLeftOf="@id/view_bg"
+        app:layout_constraintRight_toLeftOf="@id/login_qq"
+        app:layout_constraintStart_toStartOf="@id/view_bg"
+        app:layout_constraintTop_toBottomOf="@id/tv_enter_now"
+        app:srcCompat="@drawable/selector_login_wei_xin" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/login_qq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/login_wei_xin"
+        app:layout_constraintRight_toLeftOf="@id/login_wei_bo"
+        app:layout_constraintTop_toTopOf="@id/login_wei_xin"
+        app:srcCompat="@drawable/selector_login_qq" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/login_wei_bo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/login_qq"
+        app:layout_constraintRight_toLeftOf="@id/login_wang_yi"
+        app:layout_constraintTop_toTopOf="@id/login_wei_xin"
+        app:srcCompat="@drawable/selector_login_wei_bo" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/login_wang_yi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/space_50"
+        app:layout_constraintEnd_toEndOf="@id/view_bg"
+        app:layout_constraintStart_toEndOf="@id/login_wei_bo"
+        app:layout_constraintTop_toTopOf="@id/login_wei_xin"
+        app:srcCompat="@drawable/selector_login_wang_yi" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_15"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_wang_yi">
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cb_agree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:checked="false"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:theme="@style/CheckBoxWhite" />
+
+
+        <TextView
+            android:id="@+id/tv_agree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/agree"
+            android:textColor="@color/color_73ffffff"
+            android:textSize="@dimen/text_size_11" />
+
+        <TextView
+            android:id="@+id/tv_policy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_policy"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_11" />
+
+        <TextView
+            android:id="@+id/tv_policy1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_policy"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_11" />
+
+        <TextView
+            android:id="@+id/tv_policy2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/child_privacy_policy"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_11" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

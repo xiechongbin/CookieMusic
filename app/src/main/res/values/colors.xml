@@ -47,7 +47,7 @@
     <color name="a9">#ffb96d31</color>
     <color name="a_">#ffff8080</color>
     <color name="aa">#fff1f2f3</color>
-    <color name="ab">#ff507daf</color>
+    <color name="color_ff507daf">#ff507daf</color>
     <color name="ac">@color/jp</color>
     <color name="ad">@android:color/white</color>
     <color name="ae">@color/jq</color>
@@ -676,9 +676,10 @@
     <color name="ra">#ff666666</color>
     <color name="rb">#cdffffff</color>
     <color name="themeColor">@color/color_ffff3a3a</color>
+    <color name="color_fe3c3a">#fe3c3a</color>
     <color name="rd">#ffff6340</color>
     <color name="color_ffff3a3a">#ffff3a3a</color>
-    <color name="rf">#ffce3d3e</color>
+    <color name="color_ffce3d3e">#ffce3d3e</color>
     <color name="rg">#ffa53e37</color>
     <color name="rh">#1a000000</color>
     <color name="ri">#0d000000</color>
@@ -761,7 +762,7 @@
     <color name="tj">#4dffffff</color>
     <color name="tk">#59ffffff</color>
     <color name="tl">#66ffffff</color>
-    <color name="tm">#73ffffff</color>
+    <color name="color_73ffffff">#73ffffff</color>
     <color name="tn">#0dffffff</color>
     <color name="to">#80ffffff</color>
     <color name="tp">#8cffffff</color>
@@ -777,4 +778,6 @@
     <color name="tz">#f2ffffff</color>
     <color name="u0">#4dffffff</color>
     <color name="u1">#66ffffff</color>
+    <color name="color_ff3f49">#ff3f49</color>
+    <color name="color_dc2e1e">#dc2e1e</color>
 </resources>

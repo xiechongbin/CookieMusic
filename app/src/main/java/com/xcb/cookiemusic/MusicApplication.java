@@ -26,5 +26,4 @@ public class MusicApplication extends LauncherAppAgent {
         applicationContext = this;
         CrashHandler.getInstance().init(this);
     }
-
 }

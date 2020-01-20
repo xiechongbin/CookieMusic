@@ -22,8 +22,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
-        <activity android:name=".main.activity.SplashActivity"
-            android:theme="@style/fullScreenTheme">
+        <activity
+            android:name=".main.activity.SplashActivity"
+            android:theme="@style/AppTheme.fullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,6 +33,9 @@
         </activity>
 
         <activity android:name=".main.activity.MainActivity"></activity>
+        <activity
+            android:name=".login.LoginAndRegisterActivity"
+            android:theme="@style/AppTheme.fullScreenTheme" />
     </application>
 
 </manifest>

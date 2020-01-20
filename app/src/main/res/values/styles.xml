@@ -34,17 +34,11 @@
         <item name="QMUITopBarStyle">@style/QDTopBar</item>
     </style>
 
-    <style name="fullScreenTheme" parent="AppTheme">
+    <style name="AppTheme.fullScreenTheme">
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@drawable/img_splash_bg</item>
-    </style>
-
-    <style name="LaunchStyle" parent="AppTheme">
-        <!-- <item name="android:windowBackground">@drawable/bg_appbagkground</item> -->
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowFullscreen">true</item>
     </style>
 
     <style name="QDTopBar" parent="QMUI.TopBar">
@@ -52,6 +46,17 @@
         <item name="qmui_topbar_subtitle_color">@color/qmui_config_color_white</item>
         <item name="qmui_topbar_height">48dp</item>
         <item name="qmui_topbar_image_btn_height">48dp</item>
+    </style>
+
+    <!-- 更改chexkbox 颜色  使用 android:theme="@style/CheckBoxWhite". -->
+    <style name="CheckBoxWhite" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <!-- 正常颜色 -->
+        <item name="colorControlNormal">@color/white</item>
+        <!-- 选中时颜色 -->
+        <item name="colorAccent">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="color">@color/white</item>
     </style>
 
 </resources>

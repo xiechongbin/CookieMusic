@@ -1,0 +1,9 @@
+<resources>
+
+    <style name="AppTheme.fullScreenTheme">
+        <item name="android:windowBackground">@drawable/img_splash_bg</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+</resources>
