@@ -17,4 +17,6 @@ public interface OnLoginEntranceCallback {
     void onLoginWithWangYi();
 
     void onLoginWithWeiBo();
+
+    void onNextStep();
 }

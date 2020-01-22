@@ -30,7 +30,7 @@
     <color name="color_fb1f19">#fb1f19</color>
     <color name="color_4b4b4b">#4b4b4b</color>
 
-    <color name="g">@android:color/black</color>
+    <color name="black">@android:color/black</color>
     <color name="m">#ff7fa87f</color>
     <color name="n">@android:color/black</color>
     <color name="o">@android:color/black</color>

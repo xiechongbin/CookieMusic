@@ -58,7 +58,10 @@
     <string name="agree_tips">请勾选同意《用户协议》《隐私政策》和《儿童隐私政策》</string>
     <string name="phone_login_tips">未注册手机号登录后将自动创建账号</string>
     <string name="phone_login">手机号登录</string>
+    <string name="phone_verify">手机号验证</string>
     <string name="next_step">下一步</string>
     <string name="please_input_phone_number">请输入手机号</string>
+    <string name="msg_code_has_sent">短信验证码已发送至</string>
+    <string name="sent_again">重新发送</string>
 
 </resources>

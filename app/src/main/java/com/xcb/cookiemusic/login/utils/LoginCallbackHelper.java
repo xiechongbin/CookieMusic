@@ -67,4 +67,14 @@ public class LoginCallbackHelper {
             callback.onEnterNow();
         }
     }
+
+    /**
+     * 下一步
+     */
+    public static void onNextStep(Object obj) {
+        if (obj instanceof OnLoginEntranceCallback) {
+            OnLoginEntranceCallback callback = (OnLoginEntranceCallback) obj;
+            callback.onNextStep();
+        }
+    }
 }

@@ -5,7 +5,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,36 +13,35 @@ import androidx.fragment.app.FragmentManager;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.xcb.commonlibrary.base.BaseFragment;
 import com.xcb.cookiemusic.R;
-import com.xcb.cookiemusic.login.utils.LoginCallbackHelper;
+import com.xcb.cookiemusic.view.VerifyCodeView;
 
 /**
  * @author xcb
- * date：2020-01-20 14:37
- * description:电话登录
+ * date：2020-01-20 18:10
+ * description:手机号验证
  */
-public class PhoneLoginFragment extends BaseFragment implements View.OnClickListener {
-    private QMUITopBarLayout phoneLoginTopBar;
-    private TextView tv_nextStep;
+public class PhoneVerifyFragment extends BaseFragment implements View.OnClickListener {
+    private QMUITopBarLayout phoneVerifyTopBar;
+    private VerifyCodeView mVerifyCodeView;
 
-    public static PhoneLoginFragment newInstance() {
+    public static PhoneVerifyFragment newInstance() {
         Bundle args = new Bundle();
-        PhoneLoginFragment fragment = new PhoneLoginFragment();
+        PhoneVerifyFragment fragment = new PhoneVerifyFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     protected void initViews(@NonNull View root, @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        phoneLoginTopBar = root.findViewById(R.id.phoneLoginTopBar);
+        phoneVerifyTopBar = root.findViewById(R.id.phoneVerifyTopBar);
+        mVerifyCodeView = root.findViewById(R.id.verifyView);
+        mVerifyCodeView.setOnClickListener(this);
         initTopBar();
-        tv_nextStep = root.findViewById(R.id.tv_next_step);
-        tv_nextStep.setOnClickListener(this);
-
     }
 
     @Override
     protected int getLayoutID() {
-        return R.layout.fragment_login_with_phone;
+        return R.layout.fragment_phone_verify;
     }
 
     @Override
@@ -52,14 +50,21 @@ public class PhoneLoginFragment extends BaseFragment implements View.OnClickList
     }
 
     private void initTopBar() {
-        phoneLoginTopBar.setTitle(R.string.phone_login);
-        phoneLoginTopBar.setTitleGravity(Gravity.LEFT);
-        phoneLoginTopBar.addLeftImageButton(R.drawable.ic_back, R.id.id_back).setOnClickListener(new View.OnClickListener() {
+        phoneVerifyTopBar.setTitle(R.string.phone_verify);
+        phoneVerifyTopBar.setTitleGravity(Gravity.LEFT);
+        phoneVerifyTopBar.addLeftImageButton(R.drawable.ic_back, R.id.id_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popBack();
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.verifyView) {
+            mVerifyCodeView.showSoftInput();
+        }
     }
 
     /**
@@ -78,13 +83,6 @@ public class PhoneLoginFragment extends BaseFragment implements View.OnClickList
             for (int i = 0; i < ft.getBackStackEntryCount(); i++) {
                 ft.popBackStack();
             }
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.tv_next_step) {
-            LoginCallbackHelper.onNextStep(getActivity());
         }
     }
 }
