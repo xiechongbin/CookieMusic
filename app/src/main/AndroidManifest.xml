@@ -22,6 +22,11 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
+        <provider
+            android:name="com.xcb.commonlibrary.context.ApplicationContextProvider"
+            android:authorities="${applicationId}.contextprovider"
+            android:exported="false" />
+
         <activity
             android:name=".main.activity.SplashActivity"
             android:theme="@style/AppTheme.fullScreenTheme">
@@ -33,8 +38,7 @@
         </activity>
 
         <activity android:name=".main.activity.MainActivity"></activity>
-        <activity
-            android:name=".login.LoginAndRegisterActivity" />
+        <activity android:name=".login.LoginAndRegisterActivity" />
     </application>
 
 </manifest>
