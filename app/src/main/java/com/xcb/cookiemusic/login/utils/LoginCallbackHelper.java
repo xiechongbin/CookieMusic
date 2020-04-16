@@ -71,10 +71,10 @@ public class LoginCallbackHelper {
     /**
      * 下一步
      */
-    public static void onNextStep(Object obj) {
+    public static void onNextStep(Object obj,String tag) {
         if (obj instanceof OnLoginEntranceCallback) {
             OnLoginEntranceCallback callback = (OnLoginEntranceCallback) obj;
-            callback.onNextStep();
+            callback.onNextStep(tag);
         }
     }
 }

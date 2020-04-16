@@ -11,6 +11,7 @@ import com.xcb.commonlibrary.base.BaseActivity;
 import com.xcb.cookiemusic.R;
 import com.xcb.cookiemusic.login.fragment.LoginEntranceFragment;
 import com.xcb.cookiemusic.login.fragment.PhoneLoginFragment;
+import com.xcb.cookiemusic.login.fragment.PhoneRegisterSettingPasswordFragment;
 import com.xcb.cookiemusic.login.fragment.PhoneVerifyFragment;
 import com.xcb.cookiemusic.login.interfaces.OnLoginEntranceCallback;
 
@@ -112,12 +113,22 @@ public class LoginAndRegisterActivity extends BaseActivity implements OnLoginEnt
      * 下一步验证手机号
      */
     @Override
-    public void onNextStep() {
-        PhoneVerifyFragment fragment = PhoneVerifyFragment.newInstance();
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.add(R.id.fl_container, fragment, PhoneVerifyFragment.class.getSimpleName());
-        transaction.commitAllowingStateLoss();
-        transaction.addToBackStack(PhoneVerifyFragment.class.getSimpleName());
+    public void onNextStep(String tag) {
+        if (PhoneVerifyFragment.class.getSimpleName().equals(tag)) {
+            PhoneVerifyFragment fragment = PhoneVerifyFragment.newInstance();
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction transaction = fm.beginTransaction();
+            transaction.add(R.id.fl_container, fragment, PhoneVerifyFragment.class.getSimpleName());
+            transaction.commitAllowingStateLoss();
+            transaction.addToBackStack(PhoneVerifyFragment.class.getSimpleName());
+        } else if (PhoneRegisterSettingPasswordFragment.class.getSimpleName().equals(tag)) {
+            PhoneRegisterSettingPasswordFragment fragment = PhoneRegisterSettingPasswordFragment.newInstance();
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction transaction = fm.beginTransaction();
+            transaction.add(R.id.fl_container, fragment, PhoneRegisterSettingPasswordFragment.class.getSimpleName());
+            transaction.commitAllowingStateLoss();
+            transaction.addToBackStack(PhoneRegisterSettingPasswordFragment.class.getSimpleName());
+        }
+
     }
 }

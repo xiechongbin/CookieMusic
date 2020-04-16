@@ -18,5 +18,5 @@ public interface OnLoginEntranceCallback {
 
     void onLoginWithWeiBo();
 
-    void onNextStep();
+    void onNextStep(String tag);
 }

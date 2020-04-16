@@ -30,4 +30,5 @@ dependencies {
     implementation 'com.alibaba:fastjson:1.2.55'
     api 'me.yokeyword:fragmentationx-core:1.0.2'
     api 'com.qmuiteam:qmui:2.0.0-alpha02'
+    api 'io.michaelrocks:libphonenumber-android:8.11.2'
 }
